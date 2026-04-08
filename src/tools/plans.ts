@@ -58,6 +58,7 @@ export function registerPlansTools(server: McpServer): void {
           checklists: z.array(z.string()),
         })),
       })).optional(),
+      a4Memo: z.string().optional(),
       a5Checklist: z.array(z.object({ item: z.string(), result: z.string() })).optional(),
       a5Result: z.string().optional(),
       a6Summary: z.string().optional(),
