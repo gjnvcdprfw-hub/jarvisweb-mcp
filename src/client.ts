@@ -2,22 +2,20 @@ import type { ApiResult } from './types.js';
 
 const BASE_URL = 'https://jarvisweb-production-0e23.up.railway.app';
 
-function getApiKey(): string {
-  const key = process.env.JARVIS_API_KEY;
-  if (!key) throw new Error('JARVIS_API_KEY 환경변수가 설정되지 않았습니다');
-  return key;
-}
-
 async function request<T>(
   path: string,
   method: string,
   body?: unknown
 ): Promise<ApiResult<T>> {
+  const key = process.env.JARVIS_API_KEY;
+  if (!key) {
+    return { success: false, error: 'JarvisWeb 인증 실패: JARVIS_API_KEY 환경변수를 확인하세요' };
+  }
   try {
     const res = await fetch(`${BASE_URL}${path}`, {
       method,
       headers: {
-        'x-api-key': getApiKey(),
+        'x-api-key': key,
         ...(body ? { 'Content-Type': 'application/json' } : {}),
       },
       body: body ? JSON.stringify(body) : undefined,
