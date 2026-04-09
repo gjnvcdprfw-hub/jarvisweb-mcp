@@ -63,6 +63,7 @@ export function registerPlansTools(server: McpServer): void {
       a5Result: z.string().optional(),
       a6Summary: z.string().optional(),
       a6Lessons: z.string().optional(),
+      a7Review: z.string().optional(),
     },
     async (params) => {
       const { projectId, planId, ...fields } = params;

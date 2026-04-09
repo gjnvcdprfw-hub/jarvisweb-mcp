@@ -21,10 +21,12 @@ export interface Plan {
   a2Stack?: string[];
   a2Risks?: string;
   a3Structure?: PhaseStructure[];
+  a4Memo?: string;
   a5Checklist?: ChecklistItem[];
   a5Result?: string;
   a6Summary?: string;
   a6Lessons?: string;
+  a7Review?: string;
 }
 
 export interface PhaseStructure {
