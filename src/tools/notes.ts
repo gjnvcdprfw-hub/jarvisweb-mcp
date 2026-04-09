@@ -45,13 +45,14 @@ export function registerNotesTools(server: McpServer): void {
 
   server.tool(
     'jarvis_save_note',
-    '노트 저장. context→POST(noteDate필수), cautions→POST(Idempotent), code→PUT(전체 덮어쓰기), prompt→POST. PUT 후 status pending 초기화 없음.',
+    '노트 저장. context→POST(noteDate필수), cautions→POST(Idempotent), code→PUT(전체 덮어쓰기), prompt→POST. planId: 기획서에 연결할 경우 지정(optional). PUT 후 status pending 초기화 없음.',
     {
       projectId: z.number(),
       type: z.enum(['context', 'cautions', 'code', 'prompt']),
       content: z.string(),
       noteDate: z.string().optional(),
       title: z.string().optional(),
+      planId: z.number().optional(),
     },
     async ({ projectId, type, ...body }) => {
       const result = await saveNote(projectId, type, body);
